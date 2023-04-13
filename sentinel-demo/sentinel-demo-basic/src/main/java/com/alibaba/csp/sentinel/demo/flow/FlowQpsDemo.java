@@ -46,10 +46,18 @@ public class FlowQpsDemo {
 
     private static int seconds = 60 + 40;
 
+    /**
+     * 观察日志：~/logs/csp/${appName}-metrics.log.xxx
+     * <p/>
+     * |--timestamp-|------date time----|--resource-|p |block|s |e|rt
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         initFlowQpsRule();
 
-        tick();
+//        tick();
         // first make the system run on a very low condition
         simulateTraffic();
 
@@ -78,56 +86,56 @@ public class FlowQpsDemo {
         }
     }
 
-    private static void tick() {
-        Thread timer = new Thread(new TimerTask());
-        timer.setName("sentinel-timer-task");
-        timer.start();
-    }
-
-    static class TimerTask implements Runnable {
-
-        @Override
-        public void run() {
-            long start = System.currentTimeMillis();
-            System.out.println("begin to statistic!!!");
-
-            long oldTotal = 0;
-            long oldPass = 0;
-            long oldBlock = 0;
-            while (!stop) {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                }
-                long globalTotal = total.get();
-                long oneSecondTotal = globalTotal - oldTotal;
-                oldTotal = globalTotal;
-
-                long globalPass = pass.get();
-                long oneSecondPass = globalPass - oldPass;
-                oldPass = globalPass;
-
-                long globalBlock = block.get();
-                long oneSecondBlock = globalBlock - oldBlock;
-                oldBlock = globalBlock;
-
-                System.out.println(seconds + " send qps is: " + oneSecondTotal);
-                System.out.println(TimeUtil.currentTimeMillis() + ", total:" + oneSecondTotal
-                    + ", pass:" + oneSecondPass
-                    + ", block:" + oneSecondBlock);
-
-                if (seconds-- <= 0) {
-                    stop = true;
-                }
-            }
-
-            long cost = System.currentTimeMillis() - start;
-            System.out.println("time cost: " + cost + " ms");
-            System.out.println("total:" + total.get() + ", pass:" + pass.get()
-                + ", block:" + block.get());
-            System.exit(0);
-        }
-    }
+//    private static void tick() {
+//        Thread timer = new Thread(new TimerTask());
+//        timer.setName("sentinel-timer-task");
+//        timer.start();
+//    }
+//
+//    static class TimerTask implements Runnable {
+//
+//        @Override
+//        public void run() {
+//            long start = System.currentTimeMillis();
+//            System.out.println("begin to statistic!!!");
+//
+//            long oldTotal = 0;
+//            long oldPass = 0;
+//            long oldBlock = 0;
+//            while (!stop) {
+//                try {
+//                    TimeUnit.SECONDS.sleep(1);
+//                } catch (InterruptedException e) {
+//                }
+//                long globalTotal = total.get();
+//                long oneSecondTotal = globalTotal - oldTotal;
+//                oldTotal = globalTotal;
+//
+//                long globalPass = pass.get();
+//                long oneSecondPass = globalPass - oldPass;
+//                oldPass = globalPass;
+//
+//                long globalBlock = block.get();
+//                long oneSecondBlock = globalBlock - oldBlock;
+//                oldBlock = globalBlock;
+//
+//                System.out.println(seconds + " send qps is: " + oneSecondTotal);
+//                System.out.println(TimeUtil.currentTimeMillis() + ", total:" + oneSecondTotal
+//                    + ", pass:" + oneSecondPass
+//                    + ", block:" + oneSecondBlock);
+//
+//                if (seconds-- <= 0) {
+//                    stop = true;
+//                }
+//            }
+//
+//            long cost = System.currentTimeMillis() - start;
+//            System.out.println("time cost: " + cost + " ms");
+//            System.out.println("total:" + total.get() + ", pass:" + pass.get()
+//                + ", block:" + block.get());
+//            System.exit(0);
+//        }
+//    }
 
     static class RunTask implements Runnable {
         @Override

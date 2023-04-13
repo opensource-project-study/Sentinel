@@ -32,6 +32,20 @@ public class DemoController {
     @Autowired
     private TestService service;
 
+    @GetMapping("/test")
+    public void apiTest() {
+        service.test();
+    }
+
+    @GetMapping("/hello")
+    public String apiHello(@RequestParam(required = false) Long t) {
+        if (t == null) {
+            t = 100L;
+        }
+
+        return service.hello(t);
+    }
+
     @GetMapping("/foo")
     public String apiFoo(@RequestParam(required = false) Long t) throws Exception {
         if (t == null) {

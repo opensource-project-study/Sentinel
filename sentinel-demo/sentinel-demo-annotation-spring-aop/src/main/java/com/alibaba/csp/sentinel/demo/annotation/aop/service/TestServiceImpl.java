@@ -16,8 +16,6 @@
 package com.alibaba.csp.sentinel.demo.annotation.aop.service;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
-
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +39,12 @@ public class TestServiceImpl implements TestService {
         return String.format("Hello at %d", s);
     }
 
+    /**
+     * exceptionsToIgnore的意思是，当出现这里定义的异常时，不会被Sentinel保护，也就不会走fallback方法。
+     *
+     * @param name
+     * @return
+     */
     @Override
     @SentinelResource(value = "helloAnother", defaultFallback = "defaultFallback",
         exceptionsToIgnore = {IllegalStateException.class})
