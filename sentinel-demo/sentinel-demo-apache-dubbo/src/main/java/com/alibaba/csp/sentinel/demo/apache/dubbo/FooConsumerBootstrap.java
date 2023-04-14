@@ -62,63 +62,63 @@ public class FooConsumerBootstrap {
             }
         }
 
-        // method flowcontrol
-        Thread.sleep(1000);
-        initFlowRule(20, true);
-        for (int i = 0; i < 10; i++) {
-            try {
-                String message = service.sayHello("Eric");
-                System.out.println("Success: " + message);
-            } catch (SentinelRpcException ex) {
-                System.out.println("Blocked");
-                System.out.println("fallback:" + service.doAnother());
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        // fallback to result
-        Thread.sleep(1000);
-        registryCustomFallback();
-
-        for (int i = 0; i < 10; i++) {
-            try {
-                String message = service.sayHello("Eric");
-                System.out.println("Result: " + message);
-            } catch (SentinelRpcException ex) {
-                System.out.println("Blocked");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        // fallback to exception
-        Thread.sleep(1000);
-        registryCustomFallbackForCustomException();
-
-        for (int i = 0; i < 10; i++) {
-            try {
-                String message = service.sayHello("Eric");
-                System.out.println("Result: " + message);
-            } catch (SentinelRpcException ex) {
-                System.out.println("Blocked");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        Thread.sleep(1000);
-        registryCustomFallbackWhenFallbackError();
-        for (int i = 0; i < 10; i++) {
-            try {
-                String message = service.sayHello("Eric");
-                System.out.println("Result: " + message);
-            } catch (SentinelRpcException ex) {
-                System.out.println("Blocked");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
+//        // method flowcontrol
+//        Thread.sleep(1000);
+//        initFlowRule(20, true);
+//        for (int i = 0; i < 10; i++) {
+//            try {
+//                String message = service.sayHello("Eric");
+//                System.out.println("Success: " + message);
+//            } catch (SentinelRpcException ex) {
+//                System.out.println("Blocked");
+//                System.out.println("fallback:" + service.doAnother());
+//
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        // fallback to result
+//        Thread.sleep(1000);
+//        registryCustomFallback();
+//
+//        for (int i = 0; i < 10; i++) {
+//            try {
+//                String message = service.sayHello("Eric");
+//                System.out.println("Result: " + message);
+//            } catch (SentinelRpcException ex) {
+//                System.out.println("Blocked");
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//        // fallback to exception
+//        Thread.sleep(1000);
+//        registryCustomFallbackForCustomException();
+//
+//        for (int i = 0; i < 10; i++) {
+//            try {
+//                String message = service.sayHello("Eric");
+//                System.out.println("Result: " + message);
+//            } catch (SentinelRpcException ex) {
+//                System.out.println("Blocked");
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        Thread.sleep(1000);
+//        registryCustomFallbackWhenFallbackError();
+//        for (int i = 0; i < 10; i++) {
+//            try {
+//                String message = service.sayHello("Eric");
+//                System.out.println("Result: " + message);
+//            } catch (SentinelRpcException ex) {
+//                System.out.println("Blocked");
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//        }
     }
 
     public static void registryCustomFallback() {

@@ -15,14 +15,8 @@
  */
 package com.alibaba.csp.sentinel.demo.apache.dubbo;
 
-import java.util.Collections;
-
 import com.alibaba.csp.sentinel.demo.apache.dubbo.provider.ProviderConfiguration;
 import com.alibaba.csp.sentinel.init.InitExecutor;
-import com.alibaba.csp.sentinel.slots.block.RuleConstant;
-import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
-import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -38,16 +32,26 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class FooProviderBootstrap {
 
     public static void main(String[] args) {
+
+        System.setProperty("project.name", "dubbo-provider-demo");
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        System.setProperty("csp.sentinel.api.port", "8720");
+
         // Users don't need to manually call this method.
         // Only for eager initialization.
         InitExecutor.doInit();
-
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(ProviderConfiguration.class);
         context.refresh();
 
         System.out.println("Service provider is ready");
+
+        try {
+            Thread.sleep(1 * 3600 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
