@@ -15,6 +15,8 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
  * <p>把需要控制流量的代码用 Sentinel API SphU.entry("HelloWorld") 和 entry.exit() 包围起来即可。
  * <p>在下面的例子中，我们将 System.out.println("hello world"); 这段代码作为资源，用 API 包围起来。
  *
+ * <p>参考：<a href="https://sentinelguard.io/zh-cn/docs/quick-start.html">快速开始</a>
+ *
  * @author yuwenbo@kkworld.com
  * @date 2023/4/12
  */

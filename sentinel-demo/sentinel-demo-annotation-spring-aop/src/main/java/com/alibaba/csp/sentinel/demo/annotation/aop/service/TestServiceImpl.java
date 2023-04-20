@@ -19,6 +19,8 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.stereotype.Service;
 
 /**
+ * <p>Sentinel注解参考：<a href="https://sentinelguard.io/zh-cn/docs/annotation-support.html">注解支持</a>
+ *
  * @author Eric Zhao
  */
 @Service
