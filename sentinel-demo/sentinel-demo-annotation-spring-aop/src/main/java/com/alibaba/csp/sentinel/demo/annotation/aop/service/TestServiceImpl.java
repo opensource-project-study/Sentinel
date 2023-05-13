@@ -42,7 +42,7 @@ public class TestServiceImpl implements TestService {
     }
 
     /**
-     * exceptionsToIgnore的意思是，当出现这里定义的异常时，不会被Sentinel保护，也就不会走fallback方法。
+     * exceptionsToIgnore的意思是，当出现这里定义的异常时，不会走fallback方法。
      *
      * @param name
      * @return

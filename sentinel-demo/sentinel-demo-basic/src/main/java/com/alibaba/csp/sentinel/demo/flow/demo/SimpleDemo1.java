@@ -43,8 +43,10 @@ public class SimpleDemo1 {
     /**
      * <p>定义资源 HelloWorld 每秒最多只能通过 20 个请求。
      * <p>查看日志：~/logs/csp/${appName}-metrics.log.xxx
-     * <p/>
+     * <p>参考：<a href="https://github.com/alibaba/Sentinel/wiki/%E6%97%A5%E5%BF%97">日志</a>
      * |--timestamp-|------date time----|--resource-|p |block|s |e|rt
+     * <p>p stands for incoming request, block for blocked by rules, s for success handled by Sentinel, e for exception count, rt for average response time (ms), occupied stands for occupiedPassQps since 1.5.0 which enable us booking more than 1 shot when entering.
+     *
      */
     private static void initFlowRules(){
         List<FlowRule> rules = new ArrayList<>();
